@@ -1,4 +1,4 @@
 import __doggo from "./__doggo";
-import __mainCanvas from "./__mainCanvas";
+import __doggoCanvas from "./__doggoCanvas";
 
-export { __doggo as doggo, __mainCanvas as mainCanvas };
+export { __doggo as doggo, __doggoCanvas as doggoCanvas };

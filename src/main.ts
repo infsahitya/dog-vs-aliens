@@ -1,11 +1,11 @@
 import "./styles/index.scss";
-import { dogPlayerAnimate } from "./functions";
-import { mainCanvas } from "./data/constants";
+import { doggoPlayerAnimate } from "./functions";
+import { doggoCanvas } from "./data/constants";
 
 const app: HTMLDivElement | null = document.querySelector("#app");
 
 if (!app) throw new Error("Unable to extract div#app element from the DOM");
 
-dogPlayerAnimate(mainCanvas.CTX);
+doggoPlayerAnimate(doggoCanvas.CTX);
 
-app.appendChild(mainCanvas.canvas);
+app.appendChild(doggoCanvas.canvas);

@@ -1,3 +1,3 @@
-import __dogPlayerAnimate from "./__dogPlayerAnimate";
+import __doggoPlayerAnimate from "./__doggoPlayerAnimate";
 
-export { __dogPlayerAnimate as dogPlayerAnimate };
+export { __doggoPlayerAnimate as doggoPlayerAnimate };
