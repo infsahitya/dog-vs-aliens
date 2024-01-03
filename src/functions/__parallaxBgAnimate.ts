@@ -22,7 +22,7 @@ function __parallaxBgAnimate() {
     parallaxCanvas.WIDTH,
     parallaxCanvas.HEIGHT,
   );
-  
+
   LayersCollection.forEach((layer) => {
     layer.updateLayer();
     layer.drawLayer();

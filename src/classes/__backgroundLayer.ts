@@ -8,7 +8,6 @@ interface BackgroundLayerProps {
 class __backgroundLayer implements BackgroundLayerProps {
   private x: number;
   private y: number;
-  private x2: number;
   private layerSpeed: number;
   private layerWidth: number;
   private layerHeight: number;
@@ -20,7 +19,6 @@ class __backgroundLayer implements BackgroundLayerProps {
     this.y = 0;
     this.layerWidth = 2400;
     this.layerHeight = 700;
-    this.x2 = this.layerWidth;
     this.layerImage = layerImage;
     this.speedModifier = speedModifier;
     this.layerSpeed = parallaxCanvas.layerBaseSpeed * this.speedModifier;
@@ -28,13 +26,8 @@ class __backgroundLayer implements BackgroundLayerProps {
 
   updateLayer() {
     this.layerSpeed = parallaxCanvas.layerBaseSpeed * this.speedModifier;
-    if (this.x <= -this.layerWidth)
-      this.x = this.layerWidth + (this.x2 - this.layerSpeed);
-    if (this.x2 <= -this.layerWidth)
-      this.x2 = this.layerWidth + (this.x - this.layerSpeed);
-
-    this.x = Math.floor(this.x - this.layerSpeed);
-    this.x2 = Math.floor(this.x2 - this.layerSpeed);
+    if (this.x <= -this.layerWidth) this.x = 0;
+    this.x -= this.layerSpeed;
   }
 
   drawLayer() {
@@ -47,7 +40,7 @@ class __backgroundLayer implements BackgroundLayerProps {
     );
     parallaxCanvas.CTX.drawImage(
       this.layerImage,
-      this.x2,
+      this.x + this.layerWidth,
       this.y,
       this.layerWidth,
       this.layerHeight,
