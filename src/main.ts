@@ -3,7 +3,10 @@ import { dogPlayerAnimate } from "./functions";
 import DOG_PLAYER_SPRITE from "./assets/sprites/shadow_dog.png";
 import { DogPlayerAnimateFunctionProps } from "./functions/__dogPlayerAnimate";
 
-const app: HTMLDivElement = document.querySelector("#app")!;
+const app: HTMLDivElement | null = document.querySelector("#app");
+
+if (!app)
+  throw new Error("Unable to extract div#app element from the DOM");
 
 const canvas: HTMLCanvasElement = document.createElement("canvas");
 const canvasClass: Attr = document.createAttribute("id");
