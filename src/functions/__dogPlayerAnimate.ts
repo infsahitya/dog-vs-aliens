@@ -1,42 +1,27 @@
-export interface DogPlayerAnimateFunctionProps {
-  canvasCTX: CanvasRenderingContext2D;
-  dogPlayerImage: HTMLImageElement;
-  sw: number;
-  sh: number;
-  dw: number;
-  dh: number;
-  frame: {
-    X: number;
-    Y: number;
-    stagger: number;
-  };
-}
+import { doggo, mainCanvas } from "../data/constants";
 
 let animationFramesCount: number = 0;
 
-function __dogPlayerAnimate({ ...props }: DogPlayerAnimateFunctionProps): void {
-  const { canvasCTX, dogPlayerImage, sw, sh, dw, dh, frame } = props;
+function __dogPlayerAnimate(canvasCTX: CanvasRenderingContext2D): void {
+  const frame: { X: number; Y: number } = { X: 0, Y: 0 };
+  let positionX = Math.floor(animationFramesCount / doggo.staggerFrame) % 6;
+  frame.X = positionX * doggo.spriteWidth;
 
-  canvasCTX.clearRect(0, 0, dw, dh);
+  canvasCTX.clearRect(0, 0, mainCanvas.WIDTH, mainCanvas.HEIGHT);
   canvasCTX.drawImage(
-    dogPlayerImage,
-    frame.X * sw,
-    frame.Y * sh,
-    sw,
-    sh,
+    doggo.playerImage,
+    frame.X,
+    frame.Y * doggo.spriteHeight,
+    doggo.spriteWidth,
+    doggo.spriteHeight,
     0,
     0,
-    sw,
-    sh,
+    doggo.spriteWidth,
+    doggo.spriteHeight,
   );
 
-  if (animationFramesCount % frame.stagger === 0) {
-    if (frame.X < 4) frame.X++;
-    else frame.X = 0;
-  }
-
   animationFramesCount++;
-  requestAnimationFrame(() => __dogPlayerAnimate({ ...props }));
+  requestAnimationFrame(() => __dogPlayerAnimate(canvasCTX));
 }
 
 export default __dogPlayerAnimate;
