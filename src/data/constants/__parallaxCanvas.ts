@@ -5,8 +5,8 @@ canvasID.value = "parallaxCanvas";
 canvas.setAttributeNode(canvasID);
 
 const CTX: CanvasRenderingContext2D = canvas.getContext("2d")!;
-const WIDTH = (canvas.width = 600);
-const HEIGHT = (canvas.height = 500);
+const WIDTH = (canvas.width = window.innerWidth);
+const HEIGHT = (canvas.height = window.innerHeight);
 
 export default {
   canvas,
