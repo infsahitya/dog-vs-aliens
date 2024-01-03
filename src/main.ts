@@ -1,5 +1,6 @@
 import "./styles/index.scss";
 import DOG_PLAYER_SPRITE from "./assets/sprites/shadow_dog.png";
+import { dogPlayerAnimate } from "./functions";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
@@ -15,5 +16,16 @@ const CANVAS_HEIGHT = (canvas.height = 600);
 
 const dogPlayerImage: HTMLImageElement = new Image();
 dogPlayerImage.src = DOG_PLAYER_SPRITE;
+const spriteWidth: number = 575;
+const spriteHeight: number = 523;
+
+dogPlayerAnimate(
+  mainCanvasCTX,
+  dogPlayerImage,
+  spriteWidth,
+  spriteHeight,
+  CANVAS_WIDTH,
+  CANVAS_HEIGHT,
+);
 
 app.appendChild(canvas);
