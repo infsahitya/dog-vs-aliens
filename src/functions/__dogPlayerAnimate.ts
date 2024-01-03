@@ -4,14 +4,18 @@ let animationFramesCount: number = 0;
 
 function __dogPlayerAnimate(canvasCTX: CanvasRenderingContext2D): void {
   const frame: { X: number; Y: number } = { X: 0, Y: 0 };
-  let positionX = Math.floor(animationFramesCount / doggo.staggerFrame) % 6;
-  frame.X = positionX * doggo.spriteWidth;
+  let position =
+    Math.floor(animationFramesCount / doggo.staggerFrame) %
+    doggo.animationStates.idle.location.length;
+  
+  frame.X = doggo.animationStates.idle.location[position].x;
+  frame.Y = doggo.animationStates.idle.location[position].y;
 
   canvasCTX.clearRect(0, 0, mainCanvas.WIDTH, mainCanvas.HEIGHT);
   canvasCTX.drawImage(
     doggo.playerImage,
     frame.X,
-    frame.Y * doggo.spriteHeight,
+    frame.Y,
     doggo.spriteWidth,
     doggo.spriteHeight,
     0,

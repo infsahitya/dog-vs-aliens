@@ -1,11 +1,9 @@
 import DOG_PLAYER_SPRITE from "../../assets/sprites/shadow_dog.png";
 
-type AnimationStatesConfig =
-  | Record<
-      (typeof spriteStates)[number]["name"],
-      { location: { x: number; y: number }[] }
-    >
-  | Record<never, never>;
+type AnimationStatesConfig = Record<
+  (typeof spriteStates)[number]["name"],
+  { location: { x: number; y: number }[] }
+>;
 
 const playerImage: HTMLImageElement = new Image();
 playerImage.src = DOG_PLAYER_SPRITE;
@@ -28,6 +26,7 @@ const spriteStates = [
   { name: "getHit", framesCount: 4 },
 ] as const;
 
+// @ts-ignore
 const animationStates: AnimationStatesConfig = {};
 
 spriteStates.forEach((state, index) => {
@@ -41,11 +40,8 @@ spriteStates.forEach((state, index) => {
     },
   );
 
-  // @ts-ignore
   animationStates[state.name] = { location: framesLocation };
 });
-
-console.log(animationStates);
 
 export default {
   playerImage,
