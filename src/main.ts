@@ -1,6 +1,7 @@
 import "./styles/index.scss";
-import DOG_PLAYER_SPRITE from "./assets/sprites/shadow_dog.png";
 import { dogPlayerAnimate } from "./functions";
+import DOG_PLAYER_SPRITE from "./assets/sprites/shadow_dog.png";
+import { DogPlayerAnimateFunctionProps } from "./functions/__dogPlayerAnimate";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
@@ -18,14 +19,20 @@ const dogPlayerImage: HTMLImageElement = new Image();
 dogPlayerImage.src = DOG_PLAYER_SPRITE;
 const spriteWidth: number = 575;
 const spriteHeight: number = 523;
+const animationFrames: DogPlayerAnimateFunctionProps["frame"] = {
+  X: 0,
+  Y: 5,
+  stagger: 5,
+};
 
-dogPlayerAnimate(
-  mainCanvasCTX,
-  dogPlayerImage,
-  spriteWidth,
-  spriteHeight,
-  CANVAS_WIDTH,
-  CANVAS_HEIGHT,
-);
+dogPlayerAnimate({
+  canvasCTX: mainCanvasCTX,
+  dogPlayerImage: dogPlayerImage,
+  sw: spriteWidth,
+  sh: spriteHeight,
+  dw: CANVAS_WIDTH,
+  dh: CANVAS_HEIGHT,
+  frame: animationFrames,
+});
 
 app.appendChild(canvas);
