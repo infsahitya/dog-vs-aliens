@@ -1,8 +1,12 @@
 import DOG_PLAYER_SPRITE from "../../assets/sprites/shadow_dog.png";
 
-type AnimationStatesConfig = Record<
-  (typeof spriteStates)[number]["name"],
-  { location: { x: number; y: number }[] }
+export type PositionCoordinatesProps = { x: number; y: number };
+
+export type DoggoSpriteStatesNames = (typeof spriteStates)[number]["name"];
+
+export type AnimationStatesConfig = Record<
+  DoggoSpriteStatesNames,
+  { location: PositionCoordinatesProps[] }
 >;
 
 const playerImage: HTMLImageElement = new Image();
@@ -30,7 +34,7 @@ const spriteStates = [
 const animationStates: AnimationStatesConfig = {};
 
 spriteStates.forEach((state, index) => {
-  const framesLocation: { x: number; y: number }[] = Array.from(
+  const framesLocation: PositionCoordinatesProps[] = Array.from(
     { length: state.framesCount },
     (_, innerIndex) => {
       return {
