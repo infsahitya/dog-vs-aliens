@@ -8,6 +8,10 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #app {
@@ -19,8 +23,15 @@ body {
   justify-content: center;
 }
 
-#mainCanvas {
+#doggoCanvas {
   position: relative;
   width: 600px;
   height: 600px;
+}
+
+#parallaxCanvas{
+  position: relative;
+  width: 600px;
+  height: 500px;
+  border: 3px solid white;
 }
