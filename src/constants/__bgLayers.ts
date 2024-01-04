@@ -1,19 +1,21 @@
-import Layer1 from "../assets/backgrounds/layer-1.png";
-import Layer2 from "../assets/backgrounds/layer-2.png";
-import Layer3 from "../assets/backgrounds/layer-3.png";
-import Layer4 from "../assets/backgrounds/layer-4.png";
-import Layer5 from "../assets/backgrounds/layer-5.png";
+import {
+  BG_LAYER_1,
+  BG_LAYER_2,
+  BG_LAYER_3,
+  BG_LAYER_4,
+  BG_LAYER_5,
+} from "../assets/backgrounds";
 
 const bgLayer1 = new Image();
-bgLayer1.src = Layer1;
+bgLayer1.src = BG_LAYER_1;
 const bgLayer2 = new Image();
-bgLayer2.src = Layer2;
+bgLayer2.src = BG_LAYER_2;
 const bgLayer3 = new Image();
-bgLayer3.src = Layer3;
+bgLayer3.src = BG_LAYER_3;
 const bgLayer4 = new Image();
-bgLayer4.src = Layer4;
+bgLayer4.src = BG_LAYER_4;
 const bgLayer5 = new Image();
-bgLayer5.src = Layer5;
+bgLayer5.src = BG_LAYER_5;
 
 export default {
   bgLayer1,

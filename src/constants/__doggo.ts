@@ -1,4 +1,4 @@
-import DOG_PLAYER_SPRITE from "../assets/sprites/shadow_dog.png";
+import { DOGGO_PlAYER_SPRITE } from "../assets/sprites";
 
 export type PositionCoordinatesProps = { x: number; y: number };
 
@@ -10,7 +10,7 @@ export type AnimationStatesConfig = Record<
 >;
 
 const playerImage: HTMLImageElement = new Image();
-playerImage.src = DOG_PLAYER_SPRITE;
+playerImage.src = DOGGO_PlAYER_SPRITE;
 
 const staggerFrame: number = 5;
 
