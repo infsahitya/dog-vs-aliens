@@ -11,13 +11,19 @@ class __enemy implements EnemyProps {
   private sw: number;
   private sh: number;
   private speed: number;
+  private enemySprite: HTMLImageElement;
 
-  constructor() {
+  constructor(
+    enemySprite: HTMLImageElement,
+    spriteWidth: number,
+    spriteHeight: number,
+  ) {
     this.sx = Math.random() * enemyCanvas.WIDTH;
     this.sy = Math.random() * enemyCanvas.HEIGHT;
-    this.sw = 100;
-    this.sh = 100;
+    this.sw = spriteWidth;
+    this.sh = spriteHeight;
     this.speed = Math.random() * 4 - 2;
+    this.enemySprite = enemySprite;
   }
 
   updateEnemy() {
@@ -26,7 +32,17 @@ class __enemy implements EnemyProps {
   }
 
   drawEnemy() {
-    enemyCanvas.CTX.strokeRect(this.sx, this.sy, this.sw, this.sh);
+    enemyCanvas.CTX.drawImage(
+      this.enemySprite,
+      0,
+      0,
+      this.sw,
+      this.sh,
+      this.sx,
+      this.sy,
+      this.sw,
+      this.sh,
+    );
   }
 }
 
