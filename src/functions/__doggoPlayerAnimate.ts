@@ -1,5 +1,6 @@
-import { doggo, doggoCanvas } from "../data/constants";
-import { DoggoSpriteStatesNames } from "../data/constants/__doggo";
+import { doggo } from "../constants";
+import { doggoCanvas } from "../components/canvas";
+import { DoggoSpriteStatesNames } from "../constants/__doggo";
 
 let animationFramesCount: number = 0;
 const playerState: DoggoSpriteStatesNames = "ko";

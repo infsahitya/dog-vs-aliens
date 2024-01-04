@@ -1,11 +1,12 @@
 import { BackgroundLayer } from "../classes";
-import { layers, parallaxCanvas } from "../data/constants";
+import { parallaxCanvas } from "../components/canvas";
+import { bgLayers } from "../constants";
 
-const LAYER1 = new BackgroundLayer(layers.bgLayer1, 0.2);
-const LAYER2 = new BackgroundLayer(layers.bgLayer2, 0.4);
-const LAYER3 = new BackgroundLayer(layers.bgLayer3, 0.6);
-const LAYER4 = new BackgroundLayer(layers.bgLayer4, 0.8);
-const LAYER5 = new BackgroundLayer(layers.bgLayer5, 1);
+const LAYER1 = new BackgroundLayer(bgLayers.bgLayer1, 0.2);
+const LAYER2 = new BackgroundLayer(bgLayers.bgLayer2, 0.4);
+const LAYER3 = new BackgroundLayer(bgLayers.bgLayer3, 0.6);
+const LAYER4 = new BackgroundLayer(bgLayers.bgLayer4, 0.8);
+const LAYER5 = new BackgroundLayer(bgLayers.bgLayer5, 1);
 
 const LayersCollection: BackgroundLayer[] = [
   LAYER1,

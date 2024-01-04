@@ -1,4 +1,4 @@
-import { parallaxCanvas } from "../data/constants";
+import { parallaxCanvas } from "../components/canvas";
 
 interface BackgroundLayerProps {
   updateLayer: () => void;
