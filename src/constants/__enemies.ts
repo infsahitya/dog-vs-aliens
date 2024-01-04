@@ -8,7 +8,10 @@ export type EnemyTypeProps = Record<
     sprite: HTMLImageElement;
     initAnimationStates: () => void;
     spriteAnimationStates: { location: PositionCoordinatesProps[] };
-  } & Record<"spriteWidth" | "spriteHeight" | "spriteFramesCount" | "staggerFrames", number>
+  } & Record<
+    "spriteWidth" | "spriteHeight" | "spriteFramesCount" | "staggerFrames",
+    number
+  >
 >;
 
 const enemy1 = new Image();

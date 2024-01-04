@@ -40,7 +40,9 @@ class __enemy implements EnemyProps {
 
   drawEnemy() {
     const frame: PositionCoordinatesProps = { x: 0, y: 0 };
-    let position: number = Math.floor(this.animationFramesCount / this.staggerFrame) % this.framesCount;
+    let position: number =
+      Math.floor(this.animationFramesCount / this.staggerFrame) %
+      this.framesCount;
 
     frame.x = this.animationStates[position].x;
 
