@@ -28,7 +28,6 @@ class __enemy implements EnemyProps {
     this.staggerFrame = enemy.staggerFrames;
     this.framesCount = enemy.spriteFramesCount;
 
-    enemy.initAnimationStates();
     this.animationStates = enemy.spriteAnimationStates.location;
     this.speed = Math.random() * 4 - 2;
   }

@@ -1,4 +1,5 @@
 import { ENEMY_1, ENEMY_2, ENEMY_3, ENEMY_4 } from "../assets/sprites";
+import { initEnemyAnimationStates } from "../utils";
 import { PositionCoordinatesProps } from "./__doggo";
 
 type EnemyNames = "enemy1" | "enemy2" | "enemy3" | "enemy4";
@@ -6,7 +7,6 @@ export type EnemyTypeProps = Record<
   EnemyNames,
   {
     sprite: HTMLImageElement;
-    initAnimationStates: () => void;
     spriteAnimationStates: { location: PositionCoordinatesProps[] };
   } & Record<
     "spriteWidth" | "spriteHeight" | "spriteFramesCount" | "staggerFrames",
@@ -26,20 +26,12 @@ enemy4.src = ENEMY_4;
 const enemies: EnemyTypeProps = {
   enemy1: {
     sprite: enemy1,
-    staggerFrames: 5,
+    staggerFrames: 2,
     spriteWidth: 293,
     spriteHeight: 155,
     spriteFramesCount: 6,
     spriteAnimationStates: {
-      location: [],
-    },
-    initAnimationStates: function () {
-      this.spriteAnimationStates.location = Array.from(
-        { length: this.spriteFramesCount },
-        (_, index) => {
-          return { x: index * this.spriteWidth, y: 0 };
-        },
-      );
+      location: initEnemyAnimationStates(6, 293),
     },
   },
   enemy2: {
@@ -49,15 +41,7 @@ const enemies: EnemyTypeProps = {
     spriteHeight: 155,
     spriteFramesCount: 6,
     spriteAnimationStates: {
-      location: [],
-    },
-    initAnimationStates: function () {
-      this.spriteAnimationStates.location = Array.from(
-        { length: this.spriteFramesCount },
-        (_, index) => {
-          return { x: index * this.spriteWidth, y: 0 };
-        },
-      );
+      location: initEnemyAnimationStates(6, 293),
     },
   },
   enemy3: {
@@ -67,15 +51,7 @@ const enemies: EnemyTypeProps = {
     spriteHeight: 155,
     spriteFramesCount: 6,
     spriteAnimationStates: {
-      location: [],
-    },
-    initAnimationStates: function () {
-      this.spriteAnimationStates.location = Array.from(
-        { length: this.spriteFramesCount },
-        (_, index) => {
-          return { x: index * this.spriteWidth, y: 0 };
-        },
-      );
+      location: initEnemyAnimationStates(6, 293),
     },
   },
   enemy4: {
@@ -85,15 +61,7 @@ const enemies: EnemyTypeProps = {
     spriteHeight: 155,
     spriteFramesCount: 6,
     spriteAnimationStates: {
-      location: [],
-    },
-    initAnimationStates: function () {
-      this.spriteAnimationStates.location = Array.from(
-        { length: this.spriteFramesCount },
-        (_, index) => {
-          return { x: index * this.spriteWidth, y: 0 };
-        },
-      );
+      location: initEnemyAnimationStates(6, 293),
     },
   },
 };
