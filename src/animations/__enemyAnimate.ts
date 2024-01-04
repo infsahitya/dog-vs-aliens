@@ -3,8 +3,7 @@ import { enemyCanvas } from "../components/canvas";
 import { enemies } from "../constants";
 
 const enemiesCollection: Enemy[] = Array.from({ length: 10 }, () => {
-  const { sprite, spriteWidth, spriteHeight } = enemies.enemy1;
-  return new Enemy(sprite, spriteWidth, spriteHeight);
+  return new Enemy(enemies.enemy1);
 });
 
 function __enemyAnimate() {
