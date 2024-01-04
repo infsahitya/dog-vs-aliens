@@ -4,7 +4,7 @@ import { DoggoSpriteStatesNames } from "../data/constants/__doggo";
 let animationFramesCount: number = 0;
 const playerState: DoggoSpriteStatesNames = "ko";
 
-function __doggoPlayerAnimate(canvasCTX: CanvasRenderingContext2D): void {
+function __doggoPlayerAnimate(): void {
   const frame: { X: number; Y: number } = { X: 0, Y: 0 };
   let position =
     Math.floor(animationFramesCount / doggo.staggerFrame) %
@@ -13,8 +13,8 @@ function __doggoPlayerAnimate(canvasCTX: CanvasRenderingContext2D): void {
   frame.X = doggo.animationStates[playerState].location[position].x;
   frame.Y = doggo.animationStates[playerState].location[position].y;
 
-  canvasCTX.clearRect(0, 0, doggoCanvas.WIDTH, doggoCanvas.HEIGHT);
-  canvasCTX.drawImage(
+  doggoCanvas.CTX.clearRect(0, 0, doggoCanvas.WIDTH, doggoCanvas.HEIGHT);
+  doggoCanvas.CTX.drawImage(
     doggo.playerImage,
     frame.X,
     frame.Y,
@@ -27,7 +27,7 @@ function __doggoPlayerAnimate(canvasCTX: CanvasRenderingContext2D): void {
   );
 
   animationFramesCount++;
-  requestAnimationFrame(() => __doggoPlayerAnimate(canvasCTX));
+  requestAnimationFrame(() => __doggoPlayerAnimate());
 }
 
 export default __doggoPlayerAnimate;

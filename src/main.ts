@@ -6,8 +6,8 @@ const app: HTMLDivElement | null = document.querySelector("#app");
 
 if (!app) throw new Error("Unable to extract div#app element from the DOM");
 
-// window.addEventListener("load", () => doggoPlayerAnimate(doggoCanvas.CTX));
+// doggoPlayerAnimate();
 // app.appendChild(doggoCanvas.canvas);
 
-window.addEventListener("load", () => parallaxBgAnimate());
+parallaxBgAnimate();
 app.appendChild(parallaxCanvas.canvas);
