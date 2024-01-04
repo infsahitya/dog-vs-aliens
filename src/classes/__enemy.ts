@@ -1,6 +1,6 @@
 import { enemyCanvas } from "../components/canvas";
+import { EnemyTypeProps } from "../constants/__enemies";
 import { PositionCoordinatesProps } from "../constants/__doggo";
-import enemies, { EnemyTypeProps } from "../constants/__enemies";
 
 interface EnemyProps {
   updateEnemy: () => void;
@@ -40,7 +40,7 @@ class __enemy implements EnemyProps {
 
   drawEnemy() {
     const frame: PositionCoordinatesProps = { x: 0, y: 0 };
-    let position: number =
+    const position: number =
       Math.floor(this.animationFramesCount / this.staggerFrame) %
       this.framesCount;
 
