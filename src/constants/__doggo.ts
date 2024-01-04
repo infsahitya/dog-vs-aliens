@@ -1,4 +1,4 @@
-import DOG_PLAYER_SPRITE from "../../assets/sprites/shadow_dog.png";
+import DOG_PLAYER_SPRITE from "../assets/sprites/shadow_dog.png";
 
 export type PositionCoordinatesProps = { x: number; y: number };
 

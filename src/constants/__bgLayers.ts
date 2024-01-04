@@ -1,8 +1,8 @@
-import Layer1 from "../../assets/backgrounds/layer-1.png";
-import Layer2 from "../../assets/backgrounds/layer-2.png";
-import Layer3 from "../../assets/backgrounds/layer-3.png";
-import Layer4 from "../../assets/backgrounds/layer-4.png";
-import Layer5 from "../../assets/backgrounds/layer-5.png";
+import Layer1 from "../assets/backgrounds/layer-1.png";
+import Layer2 from "../assets/backgrounds/layer-2.png";
+import Layer3 from "../assets/backgrounds/layer-3.png";
+import Layer4 from "../assets/backgrounds/layer-4.png";
+import Layer5 from "../assets/backgrounds/layer-5.png";
 
 const bgLayer1 = new Image();
 bgLayer1.src = Layer1;
