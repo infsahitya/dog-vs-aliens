@@ -53,11 +53,10 @@ class __enemy implements EnemyProps {
     this.angleSpeed =
       this.animationType === "curve"
         ? Math.random() * 0.2
-        : Math.random() * 1.5 + 0.5;
-    this.curveLength =
-      this.animationType === "curve"
-        ? Math.random() * 7
-        : Math.random() * 200 + 50;
+        : this.animationType === "toggling"
+        ? Math.random() * 1.5 + 0.5
+        : 0;
+    this.curveLength = Math.random() * 7;
   }
 
   updateEnemy() {
@@ -75,10 +74,10 @@ class __enemy implements EnemyProps {
         break;
       case "toggling":
         this.dx =
-          this.curveLength * Math.sin(this.angle * (Math.PI / 90)) +
+          (enemyCanvas.WIDTH / 2) * Math.sin(this.angle * (Math.PI / 90)) +
           (enemyCanvas.WIDTH / 2 - this.dw / 2);
         this.dy =
-          this.curveLength * Math.cos(this.angle * (Math.PI / 270)) +
+          (enemyCanvas.HEIGHT / 2) * Math.cos(this.angle * (Math.PI / 270)) +
           (enemyCanvas.HEIGHT / 2 - this.dh / 2);
         this.angle += this.angleSpeed;
         this.dx = this.dx + this.dw < 0 ? enemyCanvas.WIDTH : this.dx; // resets enemy animation again from most right to left when the enemy crosses the canvas width.
