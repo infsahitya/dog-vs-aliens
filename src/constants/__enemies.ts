@@ -7,11 +7,9 @@ export type EnemyTypeProps = Record<
   EnemyNames,
   {
     sprite: HTMLImageElement;
+    animationType: "wiggle" | "flyOff";
     spriteAnimationStates: { location: PositionCoordinatesProps[] };
-  } & Record<
-    "spriteWidth" | "spriteHeight" | "spriteFramesCount" | "staggerFrames",
-    number
-  >
+  } & Record<"spriteWidth" | "spriteHeight" | "spriteFramesCount", number>
 >;
 
 const enemy1 = new Image();
@@ -26,40 +24,40 @@ enemy4.src = ENEMY_4;
 const enemies: EnemyTypeProps = {
   enemy1: {
     sprite: enemy1,
-    staggerFrames: 2,
     spriteWidth: 293,
     spriteHeight: 155,
     spriteFramesCount: 6,
+    animationType: "wiggle",
     spriteAnimationStates: {
       location: initEnemyAnimationStates(6, 293),
     },
   },
   enemy2: {
     sprite: enemy2,
-    staggerFrames: 5,
     spriteWidth: 266,
     spriteHeight: 188,
     spriteFramesCount: 6,
+    animationType: "flyOff",
     spriteAnimationStates: {
       location: initEnemyAnimationStates(6, 266),
     },
   },
   enemy3: {
     sprite: enemy3,
-    staggerFrames: 5,
     spriteWidth: 293,
     spriteHeight: 155,
     spriteFramesCount: 6,
+    animationType: "wiggle",
     spriteAnimationStates: {
       location: initEnemyAnimationStates(6, 293),
     },
   },
   enemy4: {
     sprite: enemy4,
-    staggerFrames: 5,
     spriteWidth: 293,
     spriteHeight: 155,
     spriteFramesCount: 6,
+    animationType: "wiggle",
     spriteAnimationStates: {
       location: initEnemyAnimationStates(6, 293),
     },

@@ -20,25 +20,41 @@ class __enemy implements EnemyProps {
   private enemySprite: HTMLImageElement;
   private animationFramesCount: number = 0;
   private animationStates: PositionCoordinatesProps[];
+  private animationType: EnemyTypeProps[keyof EnemyTypeProps]["animationType"];
 
   constructor(enemy: EnemyTypeProps[keyof EnemyTypeProps]) {
     this.sw = enemy.spriteWidth;
     this.sh = enemy.spriteHeight;
-    this.dx = Math.random() * enemyCanvas.WIDTH;
-    this.dy = Math.random() * enemyCanvas.HEIGHT;
+    this.dx = Math.random() * (enemyCanvas.WIDTH - this.sw);
+    this.dy = Math.random() * (enemyCanvas.HEIGHT - this.sh);
     this.dw = enemy.spriteWidth / 2.5; // Dividing sprite width with 2.5 signifies how many times I want to reduce the width of original width in order to be used while drawing image area.
     this.dh = enemy.spriteHeight / 2.5; // Dividing sprite height with 2.5 signifies how many times I want to reduce the height of original width in order to be used while drawing image area.
     this.enemySprite = enemy.sprite;
-    this.staggerFrame = enemy.staggerFrames;
+    this.animationType = enemy.animationType;
     this.framesCount = enemy.spriteFramesCount;
+    this.staggerFrame = Math.floor(Math.random() * 3 + 1);
 
     this.animationStates = enemy.spriteAnimationStates.location;
-    this.speed = Math.random() * 4 - 2;
+    this.speed =
+      this.animationType === "wiggle"
+        ? 0
+        : this.animationType === "flyOff"
+        ? Math.random() * 4 + 1
+        : 0;
   }
 
   updateEnemy() {
-    this.dx += this.speed;
-    this.dy += this.speed;
+    switch (this.animationType) {
+      case "wiggle":
+        this.speed = Math.random() * 5 - 2.5; // this.speed inside updateEnemy() method defines values locally to get random values at each render for defining wiggle animation type.
+        this.dx += this.speed;
+        this.dy += this.speed;
+        break;
+      case "flyOff":
+        this.dx -= this.speed; // decrementing this.speed to move enemy from right to left
+        this.dx = this.dx + this.dw < 0 ? enemyCanvas.WIDTH : this.dx; // resets enemy animation again from most right to left when the enemy crosses the canvas width.
+        break;
+    }
   }
 
   drawEnemy() {
@@ -49,7 +65,6 @@ class __enemy implements EnemyProps {
 
     frame.x = this.animationStates[position].x;
 
-    enemyCanvas.CTX.strokeRect(this.dx, this.dy, this.dw, this.dh);
     enemyCanvas.CTX.drawImage(
       this.enemySprite,
       frame.x, // (sx): source origin on x coordinate, frame.x changes to display the current iterated sprite

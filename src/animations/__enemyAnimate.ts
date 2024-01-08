@@ -5,7 +5,7 @@ import { enemies } from "../constants";
 const enemyCount: number = 10;
 
 const enemiesCollection: Enemy[] = Array.from({ length: enemyCount }, () => {
-  return new Enemy(enemies.enemy3);
+  return new Enemy(enemies.enemy2);
 });
 
 function __enemyAnimate() {
