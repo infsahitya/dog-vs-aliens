@@ -7,7 +7,7 @@ export type EnemyTypeProps = Record<
   EnemyNames,
   {
     sprite: HTMLImageElement;
-    animationType: "wiggle" | "curve" | "toggling";
+    animationType: "wiggle" | "curve" | "toggling" | "random";
     spriteAnimationStates: { location: PositionCoordinatesProps[] };
   } & Record<"spriteWidth" | "spriteHeight" | "spriteFramesCount", number>
 >;
@@ -54,12 +54,12 @@ const enemies: EnemyTypeProps = {
   },
   enemy4: {
     sprite: enemy4,
-    spriteWidth: 293,
-    spriteHeight: 155,
+    spriteWidth: 213,
+    spriteHeight: 213,
     spriteFramesCount: 6,
-    animationType: "wiggle",
+    animationType: "random",
     spriteAnimationStates: {
-      location: initEnemyAnimationStates(6, 293),
+      location: initEnemyAnimationStates(6, 213),
     },
   },
 };

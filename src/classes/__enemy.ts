@@ -14,6 +14,8 @@ class __enemy implements EnemyProps {
   private dy: number;
   private dw: number;
   private dh: number;
+  private randomDX: number; // ! Only for animation type - "random"
+  private randomDY: number; // ! Only for animation type - "random"
   private speed: number;
   private framesCount: number;
   private staggerFrame: number;
@@ -23,15 +25,20 @@ class __enemy implements EnemyProps {
   private frame: PositionCoordinatesProps = { x: 0, y: 0 };
   private animationType: EnemyTypeProps[keyof EnemyTypeProps]["animationType"];
 
-  private angle: number;
-  private angleSpeed: number;
-  private curveLength: number;
+  private angle: number; // ! Only for animation type - "curve" & "toggling"
+  private angleSpeed: number; // ! Only for animation type - "curve" & "toggling"
+  private curveLength: number; // ! Only for animation type - "curve"
+  private readonly positionSwitchInterval = Math.floor(
+    Math.random() * 200 + 50,
+  ); // ! Only for animation type - "random"
 
   constructor(enemy: EnemyTypeProps[keyof EnemyTypeProps]) {
     this.sw = enemy.spriteWidth;
     this.sh = enemy.spriteHeight;
     this.dx = Math.random() * (enemyCanvas.WIDTH - this.sw); // always sets the x coordinates of enemy inside canvas width
     this.dy = Math.random() * (enemyCanvas.HEIGHT - this.sh); // always sets the y coordinates of enemy inside canvas height
+    this.randomDX = Math.random() * enemyCanvas.WIDTH;
+    this.randomDY = Math.random() * enemyCanvas.HEIGHT;
     this.dw = enemy.spriteWidth / 2.5; // Dividing sprite width with 2.5 signifies how many times I want to reduce the width of original width in order to be used while drawing image area.
     this.dh = enemy.spriteHeight / 2.5; // Dividing sprite height with 2.5 signifies how many times I want to reduce the height of original width in order to be used while drawing image area.
     this.enemySprite = enemy.sprite;
@@ -40,14 +47,7 @@ class __enemy implements EnemyProps {
     this.staggerFrame = Math.floor(Math.random() * 3 + 1);
 
     this.animationStates = enemy.spriteAnimationStates.location;
-    this.speed =
-      this.animationType === "wiggle"
-        ? 0
-        : this.animationType === "curve"
-        ? Math.random() * 4 + 1
-        : this.animationType === "toggling"
-        ? Math.random() * 4 + 1
-        : 0;
+    this.speed = this.animationType === "curve" ? Math.random() * 4 + 1 : 0;
 
     this.angle = 0;
     this.angleSpeed =
@@ -81,6 +81,22 @@ class __enemy implements EnemyProps {
           (enemyCanvas.HEIGHT / 2 - this.dh / 2);
         this.angle += this.angleSpeed;
         this.dx = this.dx + this.dw < 0 ? enemyCanvas.WIDTH : this.dx; // resets enemy animation again from most right to left when the enemy crosses the canvas width.
+        break;
+      case "random":
+        if (this.animationFramesCount % this.positionSwitchInterval === 0) {
+          this.randomDX = Math.random() * (enemyCanvas.WIDTH - this.dw);
+          this.randomDY = Math.random() * (enemyCanvas.HEIGHT - this.dh);
+        }
+
+        const diffDX = this.dx - this.randomDX;
+        const diffDY = this.dy - this.randomDY;
+
+        this.dx -= diffDX / 50;
+        this.dy -= diffDY / 50;
+
+        this.dx = this.dx + this.dw < 0 ? enemyCanvas.WIDTH : this.dx; // resets enemy animation again from most right to left when the enemy crosses the canvas width.
+        break;
+      default:
         break;
     }
   }
