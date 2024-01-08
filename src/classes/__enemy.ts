@@ -23,6 +23,10 @@ class __enemy implements EnemyProps {
   private frame: PositionCoordinatesProps = { x: 0, y: 0 };
   private animationType: EnemyTypeProps[keyof EnemyTypeProps]["animationType"];
 
+  private angle: number;
+  private angleSpeed: number;
+  private curveLength: number;
+
   constructor(enemy: EnemyTypeProps[keyof EnemyTypeProps]) {
     this.sw = enemy.spriteWidth;
     this.sh = enemy.spriteHeight;
@@ -39,9 +43,21 @@ class __enemy implements EnemyProps {
     this.speed =
       this.animationType === "wiggle"
         ? 0
-        : this.animationType === "flyOff"
+        : this.animationType === "curve"
+        ? Math.random() * 4 + 1
+        : this.animationType === "toggling"
         ? Math.random() * 4 + 1
         : 0;
+
+    this.angle = 0;
+    this.angleSpeed =
+      this.animationType === "curve"
+        ? Math.random() * 0.2
+        : Math.random() * 1.5 + 0.5;
+    this.curveLength =
+      this.animationType === "curve"
+        ? Math.random() * 7
+        : Math.random() * 200 + 50;
   }
 
   updateEnemy() {
@@ -51,8 +67,20 @@ class __enemy implements EnemyProps {
         this.dx += this.speed;
         this.dy += this.speed;
         break;
-      case "flyOff":
+      case "curve":
         this.dx -= this.speed; // decrementing this.speed to move enemy from right to left
+        this.dy += this.curveLength * Math.sin(this.angle);
+        this.angle += this.angleSpeed;
+        this.dx = this.dx + this.dw < 0 ? enemyCanvas.WIDTH : this.dx; // resets enemy animation again from most right to left when the enemy crosses the canvas width.
+        break;
+      case "toggling":
+        this.dx =
+          this.curveLength * Math.sin(this.angle * (Math.PI / 90)) +
+          (enemyCanvas.WIDTH / 2 - this.dw / 2);
+        this.dy =
+          this.curveLength * Math.cos(this.angle * (Math.PI / 270)) +
+          (enemyCanvas.HEIGHT / 2 - this.dh / 2);
+        this.angle += this.angleSpeed;
         this.dx = this.dx + this.dw < 0 ? enemyCanvas.WIDTH : this.dx; // resets enemy animation again from most right to left when the enemy crosses the canvas width.
         break;
     }
