@@ -1,6 +1,5 @@
 import { enemyCanvas } from "../components/canvas";
 import { EnemyTypeProps } from "../constants/__enemies";
-import { PositionCoordinatesProps } from "../constants/__doggo";
 
 interface EnemyProps {
   updateEnemy: () => void;
@@ -21,8 +20,6 @@ class __enemy implements EnemyProps {
   private staggerFrame: number;
   private enemySprite: HTMLImageElement;
   private animationFramesCount: number = 0;
-  private animationStates: PositionCoordinatesProps[];
-  private frame: PositionCoordinatesProps = { x: 0, y: 0 };
   private animationType: EnemyTypeProps[keyof EnemyTypeProps]["animationType"];
 
   private angle: number; // ! Only for animation type - "curve" & "toggling"
@@ -46,7 +43,6 @@ class __enemy implements EnemyProps {
     this.framesCount = enemy.spriteFramesCount;
     this.staggerFrame = Math.floor(Math.random() * 3 + 1);
 
-    this.animationStates = enemy.spriteAnimationStates.location;
     this.speed = this.animationType === "curve" ? Math.random() * 4 + 1 : 0;
 
     this.angle = 0;
@@ -102,16 +98,14 @@ class __enemy implements EnemyProps {
   }
 
   drawEnemy() {
-    const position: number =
+    const positionX: number =
       Math.floor(this.animationFramesCount / this.staggerFrame) %
       this.framesCount;
 
-    this.frame.x = this.animationStates[position].x;
-
     enemyCanvas.CTX.drawImage(
       this.enemySprite,
-      this.frame.x, // (sx): source origin on x coordinate, this.frame.x changes to display the current iterated sprite
-      this.frame.y, // (sy): source origin on y coordinate, this.frame.y is constant 0 because sprite variaion in only present horizontally.
+      positionX * this.sw, // (sx): source origin on x coordinate, this.frame.x changes to display the current iterated sprite
+      0, // (sy): source origin on y coordinate, this.frame.y is constant 0 because sprite variaion in only present horizontally.
       this.sw, // (sw): source width, the original width of enemy sprite to be mentioned so that it can be fitted inside drawImage() area.
       this.sh, // (sh): source height, the original height of enemy sprite to be mentioned so that it can be fitted inside drawImage() area.
       this.dx, // (dx): destination origin on x coordinate, justifies where the enemy sprite has be be drawn along x-axis.

@@ -1,6 +1,4 @@
 import { ENEMY_1, ENEMY_2, ENEMY_3, ENEMY_4 } from "../assets/sprites";
-import { initEnemyAnimationStates } from "../utils";
-import { PositionCoordinatesProps } from "./__doggo";
 
 type EnemyNames = "enemy1" | "enemy2" | "enemy3" | "enemy4";
 export type EnemyTypeProps = Record<
@@ -8,7 +6,6 @@ export type EnemyTypeProps = Record<
   {
     sprite: HTMLImageElement;
     animationType: "wiggle" | "curve" | "toggling" | "random";
-    spriteAnimationStates: { location: PositionCoordinatesProps[] };
   } & Record<"spriteWidth" | "spriteHeight" | "spriteFramesCount", number>
 >;
 
@@ -28,9 +25,6 @@ const enemies: EnemyTypeProps = {
     spriteHeight: 155,
     spriteFramesCount: 6,
     animationType: "wiggle",
-    spriteAnimationStates: {
-      location: initEnemyAnimationStates(6, 293),
-    },
   },
   enemy2: {
     sprite: enemy2,
@@ -38,9 +32,6 @@ const enemies: EnemyTypeProps = {
     spriteHeight: 188,
     spriteFramesCount: 6,
     animationType: "curve",
-    spriteAnimationStates: {
-      location: initEnemyAnimationStates(6, 266),
-    },
   },
   enemy3: {
     sprite: enemy3,
@@ -48,9 +39,6 @@ const enemies: EnemyTypeProps = {
     spriteHeight: 177,
     spriteFramesCount: 6,
     animationType: "toggling",
-    spriteAnimationStates: {
-      location: initEnemyAnimationStates(6, 218),
-    },
   },
   enemy4: {
     sprite: enemy4,
@@ -58,9 +46,6 @@ const enemies: EnemyTypeProps = {
     spriteHeight: 213,
     spriteFramesCount: 6,
     animationType: "random",
-    spriteAnimationStates: {
-      location: initEnemyAnimationStates(6, 213),
-    },
   },
 };
 
