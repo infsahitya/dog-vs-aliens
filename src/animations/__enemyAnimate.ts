@@ -2,8 +2,10 @@ import { Enemy } from "../classes";
 import { enemyCanvas } from "../components/canvas";
 import { enemies } from "../constants";
 
-const enemiesCollection: Enemy[] = Array.from({ length: 10 }, () => {
-  return new Enemy(enemies.enemy1);
+const enemyCount: number = 10;
+
+const enemiesCollection: Enemy[] = Array.from({ length: enemyCount }, () => {
+  return new Enemy(enemies.enemy3);
 });
 
 function __enemyAnimate() {

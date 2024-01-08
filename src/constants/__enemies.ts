@@ -37,11 +37,11 @@ const enemies: EnemyTypeProps = {
   enemy2: {
     sprite: enemy2,
     staggerFrames: 5,
-    spriteWidth: 293,
-    spriteHeight: 155,
+    spriteWidth: 266,
+    spriteHeight: 188,
     spriteFramesCount: 6,
     spriteAnimationStates: {
-      location: initEnemyAnimationStates(6, 293),
+      location: initEnemyAnimationStates(6, 266),
     },
   },
   enemy3: {
