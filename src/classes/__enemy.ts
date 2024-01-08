@@ -20,13 +20,14 @@ class __enemy implements EnemyProps {
   private enemySprite: HTMLImageElement;
   private animationFramesCount: number = 0;
   private animationStates: PositionCoordinatesProps[];
+  private frame: PositionCoordinatesProps = { x: 0, y: 0 };
   private animationType: EnemyTypeProps[keyof EnemyTypeProps]["animationType"];
 
   constructor(enemy: EnemyTypeProps[keyof EnemyTypeProps]) {
     this.sw = enemy.spriteWidth;
     this.sh = enemy.spriteHeight;
-    this.dx = Math.random() * (enemyCanvas.WIDTH - this.sw);
-    this.dy = Math.random() * (enemyCanvas.HEIGHT - this.sh);
+    this.dx = Math.random() * (enemyCanvas.WIDTH - this.sw); // always sets the x coordinates of enemy inside canvas width
+    this.dy = Math.random() * (enemyCanvas.HEIGHT - this.sh); // always sets the y coordinates of enemy inside canvas height
     this.dw = enemy.spriteWidth / 2.5; // Dividing sprite width with 2.5 signifies how many times I want to reduce the width of original width in order to be used while drawing image area.
     this.dh = enemy.spriteHeight / 2.5; // Dividing sprite height with 2.5 signifies how many times I want to reduce the height of original width in order to be used while drawing image area.
     this.enemySprite = enemy.sprite;
@@ -58,17 +59,16 @@ class __enemy implements EnemyProps {
   }
 
   drawEnemy() {
-    const frame: PositionCoordinatesProps = { x: 0, y: 0 };
     const position: number =
       Math.floor(this.animationFramesCount / this.staggerFrame) %
       this.framesCount;
 
-    frame.x = this.animationStates[position].x;
+    this.frame.x = this.animationStates[position].x;
 
     enemyCanvas.CTX.drawImage(
       this.enemySprite,
-      frame.x, // (sx): source origin on x coordinate, frame.x changes to display the current iterated sprite
-      frame.y, // (sy): source origin on y coordinate, frame.y is constant 0 because sprite variaion in only present horizontally.
+      this.frame.x, // (sx): source origin on x coordinate, this.frame.x changes to display the current iterated sprite
+      this.frame.y, // (sy): source origin on y coordinate, this.frame.y is constant 0 because sprite variaion in only present horizontally.
       this.sw, // (sw): source width, the original width of enemy sprite to be mentioned so that it can be fitted inside drawImage() area.
       this.sh, // (sh): source height, the original height of enemy sprite to be mentioned so that it can be fitted inside drawImage() area.
       this.dx, // (dx): destination origin on x coordinate, justifies where the enemy sprite has be be drawn along x-axis.
