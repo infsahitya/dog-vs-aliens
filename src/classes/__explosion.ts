@@ -31,8 +31,8 @@ class __explosion implements ExplosionProps {
     this.explosionSprite.src = EXPLOSION;
     this.explosionAudio.src = SoundEffect_Explosion;
   }
-  
-  updateExplosion() { }
-  
-  drawExplosion() { }
+
+  updateExplosion() {}
+
+  drawExplosion() {}
 }
