@@ -8,11 +8,11 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
-  // background: black;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  background: black;
 }
 
 #app {
@@ -42,4 +42,11 @@ body {
   width: 100%;
   height: 100%;
   border: 3px solid black;
+}
+
+#explosionCanvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 3px solid white;
 }

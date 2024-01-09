@@ -1,10 +1,9 @@
 import "./styles/index.scss";
-import { enemyAnimate } from "./animations";
-import { enemyCanvas } from "./components/canvas";
+import { explosionCanvas } from "./components/canvas";
 
 const app: HTMLDivElement | null = document.querySelector("#app");
 
-if (!app) throw new Error("Unable to extract div#app element from the DOM");
+if (!app) throw new Error("Unable to extract div#app node from the DOM");
 
 // doggoPlayerAnimate();
 // app.appendChild(doggoCanvas.canvas);
@@ -12,5 +11,7 @@ if (!app) throw new Error("Unable to extract div#app element from the DOM");
 // parallaxBgAnimate();
 // app.appendChild(parallaxCanvas.canvas);
 
-enemyAnimate();
-app.append(enemyCanvas.canvas);
+// enemyAnimate();
+// app.append(enemyCanvas.canvas);
+
+app.append(explosionCanvas.canvas);
