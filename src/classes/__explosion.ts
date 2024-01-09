@@ -1,5 +1,6 @@
 import { SoundEffect_Explosion } from "../assets/audios";
 import { EXPLOSION } from "../assets/sprites";
+import { enemyCanvas, explosionCanvas } from "../components/canvas";
 
 interface ExplosionProps {
   updateExplosion: () => void;
@@ -7,17 +8,18 @@ interface ExplosionProps {
 }
 
 class __explosion implements ExplosionProps {
-  private sx: number = 0;
-  private readonly sy: number = 0;
+  positionX: number = 0;
   private sw: number;
   private sh: number;
-  private dy: number;
   private dx: number;
+  private dy: number;
   private dw: number;
   private dh: number;
+  readonly framesCount: number = 5;
+  private animationFramesCount: number = 0;
+  private readonly staggerFrame: number = 6;
   private readonly spriteWidth: number = 200;
   private readonly spriteHeight: number = 179;
-  private readonly staggerFrame: number = 5;
   private readonly explosionAudio: HTMLAudioElement = new Audio();
   private readonly explosionSprite: HTMLImageElement = new Image();
 
@@ -32,7 +34,31 @@ class __explosion implements ExplosionProps {
     this.explosionAudio.src = SoundEffect_Explosion;
   }
 
-  updateExplosion() {}
+  updateExplosion() {
+    if (this.animationFramesCount === 0) this.explosionAudio.play();
 
-  drawExplosion() {}
+    this.positionX =
+      Math.floor(this.animationFramesCount / this.staggerFrame) %
+      this.framesCount;
+
+    console.log(this.positionX);
+  }
+
+  drawExplosion() {
+    explosionCanvas.CTX.drawImage(
+      this.explosionSprite,
+      this.positionX * this.spriteWidth,
+      0,
+      this.sw,
+      this.sh,
+      this.dx - this.spriteWidth / 4,
+      this.dy - this.spriteHeight / 4,
+      this.dw,
+      this.dh,
+    );
+
+    ++this.animationFramesCount;
+  }
 }
+
+export default __explosion;
