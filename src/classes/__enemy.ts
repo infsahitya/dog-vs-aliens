@@ -114,7 +114,7 @@ class __enemy implements EnemyProps {
       this.dh, // (dh): destination height, the width of the area drawn be drawImage() method, in which enemy sprite will be drawn.
     );
 
-    this.animationFramesCount++;
+    ++this.animationFramesCount;
   }
 }
 

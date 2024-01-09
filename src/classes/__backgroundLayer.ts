@@ -6,19 +6,15 @@ interface BackgroundLayerProps {
 }
 
 class __backgroundLayer implements BackgroundLayerProps {
-  private x: number;
-  private y: number;
+  private x: number = 0;
+  private y: number = 0;
   private layerSpeed: number;
-  private layerWidth: number;
-  private layerHeight: number;
   private speedModifier: number;
   private layerImage: HTMLImageElement;
+  private readonly layerWidth: number = 2400;
+  private readonly layerHeight: number = 700;
 
   constructor(layerImage: HTMLImageElement, speedModifier: number) {
-    this.x = 0;
-    this.y = 0;
-    this.layerWidth = 2400;
-    this.layerHeight = 700;
     this.layerImage = layerImage;
     this.speedModifier = speedModifier;
     this.layerSpeed = parallaxCanvas.layerBaseSpeed * this.speedModifier;
@@ -26,7 +22,9 @@ class __backgroundLayer implements BackgroundLayerProps {
 
   updateLayer() {
     this.layerSpeed = parallaxCanvas.layerBaseSpeed * this.speedModifier;
+    
     if (this.x <= -this.layerWidth) this.x = 0;
+
     this.x -= this.layerSpeed;
   }
 

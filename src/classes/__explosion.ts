@@ -1,6 +1,6 @@
-import { SoundEffect_Explosion } from "../assets/audios";
 import { EXPLOSION } from "../assets/sprites";
-import { enemyCanvas, explosionCanvas } from "../components/canvas";
+import { explosionCanvas } from "../components/canvas";
+import { SoundEffect_Explosion } from "../assets/audios";
 
 interface ExplosionProps {
   updateExplosion: () => void;
@@ -40,8 +40,6 @@ class __explosion implements ExplosionProps {
     this.positionX =
       Math.floor(this.animationFramesCount / this.staggerFrame) %
       this.framesCount;
-
-    console.log(this.positionX);
   }
 
   drawExplosion() {
