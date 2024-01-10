@@ -4,6 +4,7 @@ import { ravenCanvas } from "../components/canvas";
 let lastRavenTime: number = 0;
 let nextRavenTime: number = 0;
 const ravenInterval: number = 500;
+
 let ravensCollection: Raven[] = [];
 
 function __ravenAnimate(timestamp: number) {
@@ -19,7 +20,7 @@ function __ravenAnimate(timestamp: number) {
   }
 
   [...ravensCollection].forEach((raven) => {
-    raven.updateRaven();
+    raven.updateRaven(diffTime);
     raven.drawRaven();
   });
 

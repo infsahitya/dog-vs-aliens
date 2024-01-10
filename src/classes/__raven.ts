@@ -2,7 +2,7 @@ import { ENEMY_RAVEN } from "../assets/sprites";
 import { ravenCanvas } from "../components/canvas";
 
 interface RavenProps {
-  updateRaven: () => void;
+  updateRaven: (diffTime: number) => void;
   drawRaven: () => void;
 }
 
@@ -25,25 +25,33 @@ class __raven implements RavenProps {
   private dy: number = Math.random() * (ravenCanvas.HEIGHT - this.spriteHeight);
   private animationFramesCount: number = 0;
 
+  private timeSinceLastFlap: number = 0;
+  private flapInterval: number = 100;
+
   crossedCanvas: boolean = false;
 
   constructor() {
     this.ravenSprite.src = ENEMY_RAVEN;
   }
 
-  updateRaven() {
+  updateRaven(diffTime: number) {
     if (this.dy < 0 || this.dy > ravenCanvas.HEIGHT - this.spriteHeight / 3) {
       this.positionY = -this.positionY;
     }
 
     this.dx -= this.ravenSpeed;
     this.dy += this.positionY;
+    this.timeSinceLastFlap += diffTime;
 
     if (this.dx < 0 - this.spriteWidth) this.crossedCanvas = true;
 
-    this.currentSpritePosition =
-      Math.floor(this.animationFramesCount / this.staggerFrame) %
-      this.framesCount;
+    if (this.timeSinceLastFlap > this.flapInterval) {
+      this.currentSpritePosition =
+        Math.floor(this.animationFramesCount / this.staggerFrame) %
+        this.framesCount;
+
+      this.timeSinceLastFlap = 0;
+    }
 
     ++this.animationFramesCount;
   }
