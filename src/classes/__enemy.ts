@@ -33,9 +33,9 @@ class __enemy implements EnemyProps {
 
   constructor(enemy: EnemyTypeProps[keyof EnemyTypeProps]) {
     const {
+      sprite,
       spriteWidth,
       spriteHeight,
-      sprite,
       animationType,
       spriteFramesCount,
     } = enemy;

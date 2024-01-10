@@ -1,6 +1,6 @@
 import "./styles/index.scss";
-import { explosionCanvas } from "./components/canvas";
-import { explosionAnimate } from "./animations";
+import { ravenCanvas } from "./components/canvas";
+import { ravenAnimate } from "./animations";
 
 const app: HTMLDivElement | null = document.querySelector("#app");
 
@@ -15,5 +15,8 @@ if (!app) throw new Error("Unable to extract div#app node from the DOM");
 // enemyAnimate();
 // app.append(enemyCanvas.canvas);
 
-explosionAnimate();
-app.append(explosionCanvas.canvas);
+// explosionAnimate();
+// app.append(explosionCanvas.canvas);
+
+ravenAnimate(0);
+app.append(ravenCanvas.canvas);
