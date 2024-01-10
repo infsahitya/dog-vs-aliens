@@ -1,7 +1,8 @@
 import { Raven } from "../classes";
-import { ravenCanvas } from "../components/canvas";
+import { ravenCanvas, ravenCollisionCanvas } from "../components/canvas";
 
 const { CTX } = ravenCanvas;
+const { CTX: CollisionCTX } = ravenCollisionCanvas;
 
 let lastRavenTime: number = 0;
 let nextRavenTime: number = 0;
@@ -16,6 +17,7 @@ window.addEventListener("click", (e) => {
 
 function __ravenAnimate(timestamp: number) {
   CTX.clearRect(0, 0, ravenCanvas.WIDTH, ravenCanvas.HEIGHT);
+  CollisionCTX.clearRect(0, 0, ravenCanvas.WIDTH, ravenCanvas.HEIGHT);
 
   const diffTime = timestamp - lastRavenTime;
   lastRavenTime = timestamp;
@@ -29,8 +31,6 @@ function __ravenAnimate(timestamp: number) {
       return a.getDW() - b.getDW();
     });
   }
-
-  console.log(ravensCollection);
 
   [...ravensCollection].forEach((raven) => {
     raven.updateRaven(diffTime);

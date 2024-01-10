@@ -1,5 +1,5 @@
 import { ENEMY_RAVEN } from "../assets/sprites";
-import { ravenCanvas } from "../components/canvas";
+import { ravenCanvas, ravenCollisionCanvas } from "../components/canvas";
 
 interface RavenProps {
   getDW: () => number;
@@ -7,6 +7,13 @@ interface RavenProps {
   updateRaven: (diffTime: number) => void;
   drawRaven: () => void;
 }
+
+const {
+  CTX,
+  WIDTH: RAVENCANVAS_WIDTH,
+  HEIGHT: RAVENCANVAS_HEIGHT,
+} = ravenCanvas;
+const { CTX: CollisionCTX } = ravenCollisionCanvas;
 
 class __raven implements RavenProps {
   private readonly spriteWidth: number = 271;
@@ -23,8 +30,8 @@ class __raven implements RavenProps {
   private sh: number = this.spriteHeight;
   private dw: number = this.spriteWidth / this.sizeAspectRatio;
   private dh: number = this.spriteHeight / this.sizeAspectRatio;
-  private dx: number = ravenCanvas.WIDTH;
-  private dy: number = Math.random() * (ravenCanvas.HEIGHT - this.spriteHeight);
+  private dx: number = RAVENCANVAS_WIDTH;
+  private dy: number = Math.random() * (RAVENCANVAS_HEIGHT - this.spriteHeight);
   private animationFramesCount: number = 0;
   private readonly ravenBoxColors: Record<"red" | "green" | "blue", number> = {
     red: Math.floor(Math.random() * 255),
@@ -46,7 +53,7 @@ class __raven implements RavenProps {
   getDH = () => this.dh;
 
   updateRaven(diffTime: number) {
-    if (this.dy < 0 || this.dy > ravenCanvas.HEIGHT - this.spriteHeight / 3) {
+    if (this.dy < 0 || this.dy > RAVENCANVAS_HEIGHT - this.spriteHeight / 3) {
       this.positionY = -this.positionY;
     }
 
@@ -68,10 +75,9 @@ class __raven implements RavenProps {
   }
 
   drawRaven() {
-    const { CTX } = ravenCanvas;
+    CollisionCTX.fillStyle = this.ravenColor;
+    CollisionCTX.fillRect(this.dx, this.dy, this.dw, this.dh);
 
-    CTX.fillStyle = this.ravenColor;
-    CTX.fillRect(this.dx, this.dy, this.dw, this.dh);
     CTX.drawImage(
       this.ravenSprite,
       this.currentSpritePosition * this.spriteWidth,

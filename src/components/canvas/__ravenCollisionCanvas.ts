@@ -1,6 +1,6 @@
 const canvas: HTMLCanvasElement = document.createElement("canvas");
 const canvasID: Attr = document.createAttribute("id");
-canvasID.value = "ravenCanvas";
+canvasID.value = "ravenCollisionCanvas";
 canvas.setAttributeNode(canvasID);
 
 const CTX: CanvasRenderingContext2D = canvas.getContext("2d")!;
