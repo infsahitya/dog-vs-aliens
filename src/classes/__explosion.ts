@@ -15,7 +15,7 @@ class __explosion implements ExplosionProps {
   private readonly explosionAudio: HTMLAudioElement = new Audio();
   private readonly explosionSprite: HTMLImageElement = new Image();
 
-  positionX: number = 0;
+  currentSpritePosition: number = 0;
   private sw: number = this.spriteWidth;
   private sh: number = this.spriteHeight;
   private dx: number;
@@ -34,7 +34,7 @@ class __explosion implements ExplosionProps {
   updateExplosion() {
     if (this.animationFramesCount === 0) this.explosionAudio.play();
 
-    this.positionX =
+    this.currentSpritePosition =
       Math.floor(this.animationFramesCount / this.staggerFrame) %
       this.framesCount;
   }
@@ -42,7 +42,7 @@ class __explosion implements ExplosionProps {
   drawExplosion() {
     explosionCanvas.CTX.drawImage(
       this.explosionSprite,
-      this.positionX * this.spriteWidth,
+      this.currentSpritePosition * this.spriteWidth,
       0,
       this.sw,
       this.sh,

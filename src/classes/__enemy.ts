@@ -15,6 +15,7 @@ class __enemy implements EnemyProps {
     Math.random() * 200 + 50,
   ); // ! Only for animation type - "random"
 
+  private currentSpritePosition: number = 0;
   private sw: number;
   private sh: number;
   private dx: number;
@@ -103,13 +104,13 @@ class __enemy implements EnemyProps {
   }
 
   drawEnemy() {
-    const positionX: number =
+    this.currentSpritePosition =
       Math.floor(this.animationFramesCount / this.staggerFrame) %
       this.framesCount;
 
     enemyCanvas.CTX.drawImage(
       this.enemySprite,
-      positionX * this.sw, // (sx): source origin on x coordinate, this.frame.x changes to display the current iterated sprite
+      this.currentSpritePosition * this.sw, // (sx): source origin on x coordinate, this.frame.x changes to display the current iterated sprite
       0, // (sy): source origin on y coordinate, this.frame.y is constant 0 because sprite variaion in only present horizontally.
       this.sw, // (sw): source width, the original width of enemy sprite to be mentioned so that it can be fitted inside drawImage() area.
       this.sh, // (sh): source height, the original height of enemy sprite to be mentioned so that it can be fitted inside drawImage() area.

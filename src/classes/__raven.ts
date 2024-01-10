@@ -7,31 +7,55 @@ interface RavenProps {
 }
 
 class __raven implements RavenProps {
+  private readonly framesCount: number = 6;
   private readonly spriteWidth: number = 271;
   private readonly spriteHeight: number = 194;
   private readonly ravenSpeed: number = Math.random() * 10 + 1;
   private readonly ravenSprite: HTMLImageElement = new Image();
-  private readonly sizeAspectRatio: number = Math.random() * 2.5 + 1;
+  private readonly staggerFrame: number = Math.random() * 5 + 2;
+  private readonly sizeAspectRatio: number = Math.random() * 2.5 + 1.5;
 
-  private sx: number = 0;
-  private sy: number = 0;
+  private currentSpritePosition: number = 0;
+  private positionY: number = Math.random() * 5 - 2.5;
   private sw: number = this.spriteWidth;
   private sh: number = this.spriteHeight;
   private dw: number = this.spriteWidth / this.sizeAspectRatio;
   private dh: number = this.spriteHeight / this.sizeAspectRatio;
   private dx: number = ravenCanvas.WIDTH;
   private dy: number = Math.random() * (ravenCanvas.HEIGHT - this.spriteHeight);
+  private animationFramesCount: number = 0;
 
   constructor() {
     this.ravenSprite.src = ENEMY_RAVEN;
   }
 
   updateRaven() {
+    if (this.dy < 0 || this.dy > ravenCanvas.HEIGHT - this.spriteHeight / 3) {
+      this.positionY = -this.positionY;
+    }
+
     this.dx -= this.ravenSpeed;
+    this.dy += this.positionY;
+
+    this.currentSpritePosition =
+      Math.floor(this.animationFramesCount / this.staggerFrame) %
+      this.framesCount;
+
+    ++this.animationFramesCount;
   }
-  
+
   drawRaven() {
-    ravenCanvas.CTX.drawImage(this.ravenSprite, this.sx, this.sy, this.sw, this.sh, this.dx, this.dy, this.dw, this.dh);
+    ravenCanvas.CTX.drawImage(
+      this.ravenSprite,
+      this.currentSpritePosition * this.spriteWidth,
+      0,
+      this.sw,
+      this.sh,
+      this.dx,
+      this.dy,
+      this.dw,
+      this.dh,
+    );
   }
 }
 
