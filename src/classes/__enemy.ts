@@ -7,52 +7,57 @@ interface EnemyProps {
 }
 
 class __enemy implements EnemyProps {
+  private readonly staggerFrame: number = Math.floor(Math.random() * 3 + 1);
+
+  private randomDX: number = Math.random() * enemyCanvas.WIDTH; // ! Only for animation type - "random"
+  private randomDY: number = Math.random() * enemyCanvas.HEIGHT; // ! Only for animation type - "random"
+  private readonly positionSwitchInterval = Math.floor(
+    Math.random() * 200 + 50,
+  ); // ! Only for animation type - "random"
+
   private sw: number;
   private sh: number;
   private dx: number;
   private dy: number;
   private dw: number;
   private dh: number;
-  private randomDX: number; // ! Only for animation type - "random"
-  private randomDY: number; // ! Only for animation type - "random"
   private speed: number;
   private framesCount: number;
-  private staggerFrame: number;
   private enemySprite: HTMLImageElement;
   private animationFramesCount: number = 0;
   private animationType: EnemyTypeProps[keyof EnemyTypeProps]["animationType"];
 
-  private angle: number; // ! Only for animation type - "curve" & "toggling"
+  private angle: number = 0; // ! Only for animation type - "curve" & "toggling"
   private angleSpeed: number; // ! Only for animation type - "curve" & "toggling"
-  private curveLength: number; // ! Only for animation type - "curve"
-  private readonly positionSwitchInterval = Math.floor(
-    Math.random() * 200 + 50,
-  ); // ! Only for animation type - "random"
+  private curveLength: number = Math.random() * 7; // ! Only for animation type - "curve"
 
   constructor(enemy: EnemyTypeProps[keyof EnemyTypeProps]) {
-    this.sw = enemy.spriteWidth;
-    this.sh = enemy.spriteHeight;
-    this.dx = Math.random() * (enemyCanvas.WIDTH - this.sw); // always sets the x coordinates of enemy inside canvas width
-    this.dy = Math.random() * (enemyCanvas.HEIGHT - this.sh); // always sets the y coordinates of enemy inside canvas height
-    this.randomDX = Math.random() * enemyCanvas.WIDTH;
-    this.randomDY = Math.random() * enemyCanvas.HEIGHT;
-    this.dw = enemy.spriteWidth / 2.5; // Dividing sprite width with 2.5 signifies how many times I want to reduce the width of original width in order to be used while drawing image area.
-    this.dh = enemy.spriteHeight / 2.5; // Dividing sprite height with 2.5 signifies how many times I want to reduce the height of original width in order to be used while drawing image area.
-    this.enemySprite = enemy.sprite;
-    this.animationType = enemy.animationType;
-    this.framesCount = enemy.spriteFramesCount;
-    this.staggerFrame = Math.floor(Math.random() * 3 + 1);
+    const {
+      spriteWidth,
+      spriteHeight,
+      sprite,
+      animationType,
+      spriteFramesCount,
+    } = enemy;
 
-    this.speed = this.animationType === "curve" ? Math.random() * 4 + 1 : 0;
+    this.sw = spriteWidth;
+    this.sh = spriteHeight;
+    this.dx = Math.random() * (enemyCanvas.WIDTH - spriteWidth); // always sets the x coordinates of enemy inside canvas width
+    this.dy = Math.random() * (enemyCanvas.HEIGHT - spriteHeight); // always sets the y coordinates of enemy inside canvas height
+    this.dw = this.sw / 2.5; // Dividing sprite width with 2.5 signifies how many times I want to reduce the width of original width in order to be used while drawing image area.
+    this.dh = this.sh / 2.5; // Dividing sprite height with 2.5 signifies how many times I want to reduce the height of original width in order to be used while drawing image area.
+    this.enemySprite = sprite;
+    this.animationType = animationType;
+    this.framesCount = spriteFramesCount;
 
-    this.angle = 0;
+    this.speed = animationType === "curve" ? Math.random() * 4 + 1 : 0;
+
     this.angleSpeed =
-      this.animationType === "curve"
+      animationType === "curve"
         ? Math.random() * 0.2
-        : this.animationType === "toggling"
+        : animationType === "toggling"
         ? Math.random() * 1.5 + 0.5
         : 0;
-    this.curveLength = Math.random() * 7;
   }
 
   updateEnemy() {

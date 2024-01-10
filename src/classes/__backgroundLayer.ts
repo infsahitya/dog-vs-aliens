@@ -22,7 +22,7 @@ class __backgroundLayer implements BackgroundLayerProps {
 
   updateLayer() {
     this.layerSpeed = parallaxCanvas.layerBaseSpeed * this.speedModifier;
-    
+
     if (this.x <= -this.layerWidth) this.x = 0;
 
     this.x -= this.layerSpeed;
