@@ -25,6 +25,8 @@ class __raven implements RavenProps {
   private dy: number = Math.random() * (ravenCanvas.HEIGHT - this.spriteHeight);
   private animationFramesCount: number = 0;
 
+  crossedCanvas: boolean = false;
+
   constructor() {
     this.ravenSprite.src = ENEMY_RAVEN;
   }
@@ -36,6 +38,8 @@ class __raven implements RavenProps {
 
     this.dx -= this.ravenSpeed;
     this.dy += this.positionY;
+
+    if (this.dx < 0 - this.spriteWidth) this.crossedCanvas = true;
 
     this.currentSpritePosition =
       Math.floor(this.animationFramesCount / this.staggerFrame) %
