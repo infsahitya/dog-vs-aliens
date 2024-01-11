@@ -55,11 +55,11 @@ class __raven implements RavenProps {
   getDW = () => this.dw;
   getDH = () => this.dh;
 
-  ravenCollision(colors: [number, number, number]) {
+  ravenCollision(pixelColors: [number, number, number]) {
     this.markForDeletion =
-      this.ravenBoxColors.red === colors[0] &&
-      this.ravenBoxColors.green === colors[1] &&
-      this.ravenBoxColors.blue === colors[2];
+      this.ravenBoxColors.red === pixelColors[0] &&
+      this.ravenBoxColors.green === pixelColors[1] &&
+      this.ravenBoxColors.blue === pixelColors[2];
   }
 
   updateRaven(diffTime: number) {

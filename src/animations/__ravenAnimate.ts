@@ -12,9 +12,8 @@ let ravensCollection: Raven[] = [];
 
 window.addEventListener("click", (e) => {
   const pixelColor = CollisionCTX.getImageData(e.x, e.y, 1, 1);
-  console.log(pixelColor);
   ravensCollection.forEach((raven) => {
-    raven.ravenClickHandler([
+    raven.ravenCollision([
       pixelColor.data[0],
       pixelColor.data[1],
       pixelColor.data[2],
