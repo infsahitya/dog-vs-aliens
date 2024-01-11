@@ -9,7 +9,7 @@ interface ExplosionProps {
 
 class __explosion implements ExplosionProps {
   readonly framesCount: number = 5;
-  private readonly staggerFrame: number = 6;
+  private readonly staggerFrame: number = 4;
   private readonly spriteWidth: number = 200;
   private readonly spriteHeight: number = 179;
   private readonly explosionAudio: HTMLAudioElement = new Audio();
