@@ -1,6 +1,11 @@
 import { Raven } from "../classes";
 import { ravenCanvas, ravenCollisionCanvas } from "../components/canvas";
 
+type AttackRavenScoreProps = {
+  ravenAttackPlayerScore: number;
+  updateRavenAttackPlayerScore: () => void;
+};
+
 const { CTX } = ravenCanvas;
 const { CTX: CollisionCTX } = ravenCollisionCanvas;
 
@@ -13,10 +18,7 @@ let ravensCollection: Raven[] = [];
 export let {
   ravenAttackPlayerScore,
   updateRavenAttackPlayerScore,
-}: {
-  ravenAttackPlayerScore: number;
-  updateRavenAttackPlayerScore: () => void;
-} = {
+}: AttackRavenScoreProps = {
   ravenAttackPlayerScore: 0,
   updateRavenAttackPlayerScore: function () {
     ++ravenAttackPlayerScore;
