@@ -11,13 +11,18 @@ const ravenInterval: number = 500;
 let ravensCollection: Raven[] = [];
 
 window.addEventListener("click", (e) => {
-  const pixelColor = CTX.getImageData(e.x, e.y, 1, 1);
+  const pixelColor = CollisionCTX.getImageData(e.x, e.y, 1, 1);
   console.log(pixelColor);
+  ravensCollection.forEach(raven => {
+    raven.ravenClickHandler([pixelColor.data[0], pixelColor.data[1], pixelColor.data[2]])
+  })
 });
 
 function __ravenAnimate(timestamp: number) {
   CTX.clearRect(0, 0, ravenCanvas.WIDTH, ravenCanvas.HEIGHT);
   CollisionCTX.clearRect(0, 0, ravenCanvas.WIDTH, ravenCanvas.HEIGHT);
+
+  ravensCollection = ravensCollection.filter((raven) => !raven.markForDeletion);
 
   const diffTime = timestamp - lastRavenTime;
   lastRavenTime = timestamp;
@@ -36,8 +41,6 @@ function __ravenAnimate(timestamp: number) {
     raven.updateRaven(diffTime);
     raven.drawRaven();
   });
-
-  ravensCollection = ravensCollection.filter((raven) => !raven.crossedCanvas);
 
   requestAnimationFrame(__ravenAnimate);
 }

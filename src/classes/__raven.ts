@@ -1,11 +1,14 @@
 import { ENEMY_RAVEN } from "../assets/sprites";
 import { ravenCanvas, ravenCollisionCanvas } from "../components/canvas";
 
+type RavenColorProps = Record<"red" | "green" | "blue", number>;
+
 interface RavenProps {
   getDW: () => number;
   getDH: () => number;
-  updateRaven: (diffTime: number) => void;
   drawRaven: () => void;
+  updateRaven: (diffTime: number) => void;
+  ravenCollision: (colors: [number, number, number]) => void;
 }
 
 const {
@@ -33,17 +36,17 @@ class __raven implements RavenProps {
   private dx: number = RAVENCANVAS_WIDTH;
   private dy: number = Math.random() * (RAVENCANVAS_HEIGHT - this.spriteHeight);
   private animationFramesCount: number = 0;
-  private readonly ravenBoxColors: Record<"red" | "green" | "blue", number> = {
+  private readonly ravenBoxColors: RavenColorProps = {
     red: Math.floor(Math.random() * 255),
     green: Math.floor(Math.random() * 255),
     blue: Math.floor(Math.random() * 255),
   };
-  private readonly ravenColor: string = `rgb(${this.ravenBoxColors.red}, ${this.ravenBoxColors.green}, ${this.ravenBoxColors.blue})`;
+  private readonly boxColor: string = `rgb(${this.ravenBoxColors.red}, ${this.ravenBoxColors.green}, ${this.ravenBoxColors.blue})`;
 
   private timeSinceLastFlap: number = 0;
   private flapInterval: number = 100;
 
-  crossedCanvas: boolean = false;
+  markForDeletion: boolean = false;
 
   constructor() {
     this.ravenSprite.src = ENEMY_RAVEN;
@@ -51,6 +54,10 @@ class __raven implements RavenProps {
 
   getDW = () => this.dw;
   getDH = () => this.dh;
+
+  ravenCollision(colors: [number, number, number]) {
+    this.markForDeletion = this.ravenBoxColors.red === colors[0] && this.ravenBoxColors.green === colors[1] && this.ravenBoxColors.blue === colors[2]; 
+  }
 
   updateRaven(diffTime: number) {
     if (this.dy < 0 || this.dy > RAVENCANVAS_HEIGHT - this.spriteHeight / 3) {
@@ -61,7 +68,7 @@ class __raven implements RavenProps {
     this.dy += this.positionY;
     this.timeSinceLastFlap += diffTime;
 
-    if (this.dx < 0 - this.spriteWidth) this.crossedCanvas = true;
+    if (this.dx < 0 - this.spriteWidth) this.markForDeletion = true;
 
     if (this.timeSinceLastFlap > this.flapInterval) {
       this.currentSpritePosition =
@@ -75,7 +82,7 @@ class __raven implements RavenProps {
   }
 
   drawRaven() {
-    CollisionCTX.fillStyle = this.ravenColor;
+    CollisionCTX.fillStyle = this.boxColor;
     CollisionCTX.fillRect(this.dx, this.dy, this.dw, this.dh);
 
     CTX.drawImage(
