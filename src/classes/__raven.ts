@@ -65,7 +65,9 @@ class __raven implements RavenProps {
       this.ravenBoxColors.blue === pixelColors[2]
     ) {
       this.markForDeletion = true;
-      explosionsCollection.push(new Explosion(this.dx, this.dy, this.dw, this.dh));
+      explosionsCollection.push(
+        new Explosion(this.dx, this.dy, this.dw, this.dh),
+      );
       updateRavenAttackPlayerScore();
     }
   }

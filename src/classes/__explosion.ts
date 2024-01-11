@@ -24,7 +24,12 @@ class __explosion implements ExplosionProps {
   private dh: number;
   private animationFramesCount: number = 0;
 
-  constructor(posX: number, posY: number, originWidth: number, originHeight: number) {
+  constructor(
+    posX: number,
+    posY: number,
+    originWidth: number,
+    originHeight: number,
+  ) {
     this.dx = posX;
     this.dy = posY;
     this.dw = originWidth;

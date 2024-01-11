@@ -1,5 +1,9 @@
 import "./styles/index.scss";
-import { explosionCanvas, ravenCanvas, ravenCollisionCanvas } from "./components/canvas";
+import {
+  explosionCanvas,
+  ravenCanvas,
+  ravenCollisionCanvas,
+} from "./components/canvas";
 import { explosionAnimate, ravenAnimate } from "./animations";
 
 const app: HTMLDivElement | null = document.querySelector("#app");

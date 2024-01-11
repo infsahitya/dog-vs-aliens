@@ -54,12 +54,12 @@ function __ravenAnimate(timestamp: number) {
   if (nextRavenTime > ravenInterval) {
     ravensCollection.push(new Raven());
     nextRavenTime = 0;
-    
+
     ravensCollection.sort((a, b) => {
       return a.getDW() - b.getDW();
     });
   }
-  
+
   [...ravensCollection].forEach((raven) => {
     raven.updateRaven(diffTime);
     raven.drawRaven();
