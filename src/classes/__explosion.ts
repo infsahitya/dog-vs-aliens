@@ -20,13 +20,15 @@ class __explosion implements ExplosionProps {
   private sh: number = this.spriteHeight;
   private dx: number;
   private dy: number;
-  private dw: number = this.spriteWidth / 2;
-  private dh: number = this.spriteHeight / 2;
+  private dw: number;
+  private dh: number;
   private animationFramesCount: number = 0;
 
-  constructor(posX: number, posY: number) {
+  constructor(posX: number, posY: number, originWidth: number, originHeight: number) {
     this.dx = posX;
     this.dy = posY;
+    this.dw = originWidth;
+    this.dh = originHeight;
     this.explosionSprite.src = EXPLOSION;
     this.explosionAudio.src = SoundEffect_Explosion;
   }
@@ -46,8 +48,8 @@ class __explosion implements ExplosionProps {
       0,
       this.sw,
       this.sh,
-      this.dx - this.spriteWidth / 4,
-      this.dy - this.spriteHeight / 4,
+      this.dx,
+      this.dy,
       this.dw,
       this.dh,
     );

@@ -1,11 +1,11 @@
 import { Explosion } from "../classes";
 import { explosionCanvas } from "../components/canvas";
 
-const explosionsCollection: Explosion[] = [];
+export const explosionsCollection: Explosion[] = [];
 
-window.addEventListener("click", (e: MouseEvent) => {
-  explosionsCollection.push(new Explosion(e.x, e.y));
-});
+// window.addEventListener("click", (e: MouseEvent) => {
+//   explosionsCollection.push(new Explosion(e.x, e.y));
+// });
 
 function __explosionAnimate() {
   explosionCanvas.CTX.clearRect(
@@ -19,7 +19,7 @@ function __explosionAnimate() {
     explosion.updateExplosion();
     explosion.drawExplosion();
 
-    if (explosion.positionX >= explosion.framesCount - 1) {
+    if (explosion.currentSpritePosition >= explosion.framesCount - 1) {
       explosionsCollection.splice(index, 1);
       --index;
     }

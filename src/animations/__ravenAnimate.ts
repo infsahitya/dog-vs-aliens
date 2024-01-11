@@ -64,7 +64,7 @@ function __ravenAnimate(timestamp: number) {
     raven.updateRaven(diffTime);
     raven.drawRaven();
   });
-  
+
   ravensCollection = ravensCollection.filter((raven) => !raven.markForDeletion);
 
   requestAnimationFrame(__ravenAnimate);

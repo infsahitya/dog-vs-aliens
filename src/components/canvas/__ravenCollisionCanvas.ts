@@ -3,7 +3,7 @@ const canvasID: Attr = document.createAttribute("id");
 canvasID.value = "ravenCollisionCanvas";
 canvas.setAttributeNode(canvasID);
 
-const CTX: CanvasRenderingContext2D = canvas.getContext("2d")!;
+const CTX: CanvasRenderingContext2D = canvas.getContext("2d", { willReadFrequently: true })!;
 const WIDTH = (canvas.width = window.innerWidth);
 const HEIGHT = (canvas.height = window.innerHeight);
 

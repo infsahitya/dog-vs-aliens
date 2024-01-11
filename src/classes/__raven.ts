@@ -1,6 +1,8 @@
 import { ENEMY_RAVEN } from "../assets/sprites";
 import { ravenCanvas, ravenCollisionCanvas } from "../components/canvas";
 import { updateRavenAttackPlayerScore } from "../animations/__ravenAnimate";
+import { Explosion } from ".";
+import { explosionsCollection } from "../animations/__explosionAnimate";
 
 type RavenColorProps = Record<"red" | "green" | "blue", number>;
 
@@ -63,6 +65,7 @@ class __raven implements RavenProps {
       this.ravenBoxColors.blue === pixelColors[2]
     ) {
       this.markForDeletion = true;
+      explosionsCollection.push(new Explosion(this.dx, this.dy, this.dw, this.dh));
       updateRavenAttackPlayerScore();
     }
   }
