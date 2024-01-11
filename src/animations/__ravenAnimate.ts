@@ -10,6 +10,19 @@ const ravenInterval: number = 500;
 
 let ravensCollection: Raven[] = [];
 
+export let {
+  ravenAttackPlayerScore,
+  updateRavenAttackPlayerScore,
+}: {
+  ravenAttackPlayerScore: number;
+  updateRavenAttackPlayerScore: () => void;
+} = {
+  ravenAttackPlayerScore: 0,
+  updateRavenAttackPlayerScore: function () {
+    ++ravenAttackPlayerScore;
+  },
+};
+
 window.addEventListener("click", (e) => {
   const pixelColor = CollisionCTX.getImageData(e.x, e.y, 1, 1);
   ravensCollection.forEach((raven) => {
@@ -20,6 +33,13 @@ window.addEventListener("click", (e) => {
     ]);
   });
 });
+
+function drawScore() {
+  CTX.fillStyle = "black";
+  CTX.fillText(`Score ${ravenAttackPlayerScore}`, 50, 75);
+  CTX.fillStyle = "white";
+  CTX.fillText(`Score ${ravenAttackPlayerScore}`, 55, 80);
+}
 
 function __ravenAnimate(timestamp: number) {
   CTX.clearRect(0, 0, ravenCanvas.WIDTH, ravenCanvas.HEIGHT);
@@ -44,6 +64,8 @@ function __ravenAnimate(timestamp: number) {
     raven.updateRaven(diffTime);
     raven.drawRaven();
   });
+
+  drawScore();
 
   requestAnimationFrame(__ravenAnimate);
 }

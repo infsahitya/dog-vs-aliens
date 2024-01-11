@@ -1,5 +1,6 @@
 import { ENEMY_RAVEN } from "../assets/sprites";
 import { ravenCanvas, ravenCollisionCanvas } from "../components/canvas";
+import { updateRavenAttackPlayerScore } from "../animations/__ravenAnimate";
 
 type RavenColorProps = Record<"red" | "green" | "blue", number>;
 
@@ -56,10 +57,14 @@ class __raven implements RavenProps {
   getDH = () => this.dh;
 
   ravenCollision(pixelColors: [number, number, number]) {
-    this.markForDeletion =
+    if (
       this.ravenBoxColors.red === pixelColors[0] &&
       this.ravenBoxColors.green === pixelColors[1] &&
-      this.ravenBoxColors.blue === pixelColors[2];
+      this.ravenBoxColors.blue === pixelColors[2]
+    ) {
+      this.markForDeletion = true;
+      updateRavenAttackPlayerScore();
+    }
   }
 
   updateRaven(diffTime: number) {
