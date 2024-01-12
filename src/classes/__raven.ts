@@ -1,8 +1,8 @@
 import { ENEMY_RAVEN } from "../assets/sprites";
 import { ravenCanvas, ravenCollisionCanvas } from "../components/canvas";
-import { updateRavenAttackPlayerScore } from "../animations/__ravenAnimate";
 import { Explosion } from ".";
 import { explosionsCollection } from "../animations/__explosionAnimate";
+import { updateRavenAttackPlayerScore } from "../states";
 
 type RavenColorProps = Record<"red" | "green" | "blue", number>;
 

@@ -1,10 +1,9 @@
 import { Raven } from "../classes";
 import { ravenCanvas, ravenCollisionCanvas } from "../components/canvas";
-
-type AttackRavenScoreProps = {
-  ravenAttackPlayerScore: number;
-  updateRavenAttackPlayerScore: () => void;
-};
+import {
+  drawRavenAttackPlayerLifeBar,
+  drawRavenAttackPlayerScore,
+} from "../helpers";
 
 const { CTX } = ravenCanvas;
 const { CTX: CollisionCTX } = ravenCollisionCanvas;
@@ -14,16 +13,6 @@ let nextRavenTime: number = 0;
 const ravenInterval: number = 500;
 
 let ravensCollection: Raven[] = [];
-
-export let {
-  ravenAttackPlayerScore,
-  updateRavenAttackPlayerScore,
-}: AttackRavenScoreProps = {
-  ravenAttackPlayerScore: 0,
-  updateRavenAttackPlayerScore: function () {
-    ++ravenAttackPlayerScore;
-  },
-};
 
 window.addEventListener("click", (e) => {
   const pixelColor = CollisionCTX.getImageData(e.x, e.y, 1, 1);
@@ -36,18 +25,12 @@ window.addEventListener("click", (e) => {
   });
 });
 
-function drawScore() {
-  CTX.fillStyle = "black";
-  CTX.fillText(`Score ${ravenAttackPlayerScore}`, 50, 75);
-  CTX.fillStyle = "white";
-  CTX.fillText(`Score ${ravenAttackPlayerScore}`, 55, 80);
-}
-
 function __ravenAnimate(timestamp: number) {
   CTX.clearRect(0, 0, ravenCanvas.WIDTH, ravenCanvas.HEIGHT);
   CollisionCTX.clearRect(0, 0, ravenCanvas.WIDTH, ravenCanvas.HEIGHT);
 
-  drawScore();
+  drawRavenAttackPlayerScore();
+  drawRavenAttackPlayerLifeBar();
 
   const diffTime = timestamp - lastRavenTime;
   lastRavenTime = timestamp;
