@@ -5,6 +5,7 @@ import {
   ravenCollisionCanvas,
 } from "./components/canvas";
 import { explosionAnimate, ravenAnimate } from "./animations";
+import { RAVENGAME_AUDIO } from "./assets/audios";
 
 const app: HTMLDivElement | null = document.querySelector("#app");
 
@@ -27,3 +28,9 @@ app.append(ravenCanvas.canvas);
 app.append(explosionCanvas.canvas);
 ravenAnimate(0);
 explosionAnimate();
+const ravenGameAudio = new Audio();
+ravenGameAudio.src = RAVENGAME_AUDIO;
+ravenGameAudio.loop = true;
+ravenGameAudio.volume = 0.1;
+window.onclick = () => ravenGameAudio.play();
+
