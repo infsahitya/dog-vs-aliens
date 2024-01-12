@@ -2,7 +2,10 @@ import { ENEMY_RAVEN } from "../assets/sprites";
 import { ravenCanvas, ravenCollisionCanvas } from "../components/canvas";
 import { Explosion } from ".";
 import { explosionsCollection } from "../animations/__explosionAnimate";
-import { updateRavenAttackPlayerScore } from "../states";
+import {
+  updateRavenAttackPlayerLife,
+  updateRavenAttackPlayerScore,
+} from "../states";
 
 type RavenColorProps = Record<"red" | "green" | "blue", number>;
 
@@ -68,6 +71,7 @@ class __raven implements RavenProps {
       explosionsCollection.push(
         new Explosion(this.dx, this.dy, this.dw, this.dh),
       );
+      updateRavenAttackPlayerLife("+");
       updateRavenAttackPlayerScore();
     }
   }
@@ -81,7 +85,10 @@ class __raven implements RavenProps {
     this.dy += this.positionY;
     this.timeSinceLastFlap += diffTime;
 
-    if (this.dx < 0 - this.spriteWidth) this.markForDeletion = true;
+    if (this.dx < 0 - this.spriteWidth) {
+      this.markForDeletion = true;
+      updateRavenAttackPlayerLife("-");
+    }
 
     if (this.timeSinceLastFlap > this.flapInterval) {
       this.currentSpritePosition =

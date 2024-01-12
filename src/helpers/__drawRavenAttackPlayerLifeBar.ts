@@ -1,5 +1,6 @@
 import { ravenCanvas } from "../components/canvas";
 import { PositionCoordinatesProps } from "../constants/__doggo";
+import { ravenAttackPlayerLife } from "../states";
 
 const { CTX } = ravenCanvas;
 
@@ -7,8 +8,7 @@ function __drawRavenAttackPlayerLifeBar() {
   const boxWidth: number = 300;
   const boxHeight: number = 50;
   const borderRadius: number = 20;
-  let counter: number = 50;
-  const fillWidth: number = (counter / 100) * boxWidth;
+  const fillWidth: number = (ravenAttackPlayerLife / 100) * boxWidth;
 
   const lifeBarPosition: PositionCoordinatesProps = {
     x: ravenCanvas.WIDTH - boxWidth - 50,
@@ -21,8 +21,8 @@ function __drawRavenAttackPlayerLifeBar() {
     lifeBarPosition.x + boxWidth,
     lifeBarPosition.y,
   );
-  fillGradient.addColorStop(0, "lightgreen");
-  fillGradient.addColorStop(1, "red");
+  fillGradient.addColorStop(0, "red");
+  fillGradient.addColorStop(1, "lightgreen");
 
   CTX.lineWidth = 3;
   CTX.shadowColor = "transparent";

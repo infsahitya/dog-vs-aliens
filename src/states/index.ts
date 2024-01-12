@@ -6,10 +6,16 @@ import {
   ravenAttackGameOver,
   setRavenAttackGameOver,
 } from "./__ravenAttackGameOver";
+import {
+  ravenAttackPlayerLife,
+  updateRavenAttackPlayerLife,
+} from "./__ravenAttackPlayerLifeBar";
 
 export {
-  ravenAttackGameOver,
-  updateRavenAttackPlayerScore,
   ravenAttackPlayerScore,
+  updateRavenAttackPlayerScore,
+  ravenAttackGameOver,
   setRavenAttackGameOver,
+  ravenAttackPlayerLife,
+  updateRavenAttackPlayerLife,
 };

@@ -4,6 +4,7 @@ import {
   drawRavenAttackPlayerLifeBar,
   drawRavenAttackPlayerScore,
 } from "../helpers";
+import { ravenAttackGameOver } from "../states";
 
 const { CTX } = ravenCanvas;
 const { CTX: CollisionCTX } = ravenCollisionCanvas;
@@ -52,7 +53,7 @@ function __ravenAnimate(timestamp: number) {
 
   ravensCollection = ravensCollection.filter((raven) => !raven.markForDeletion);
 
-  requestAnimationFrame(__ravenAnimate);
+  if (!ravenAttackGameOver) requestAnimationFrame(__ravenAnimate);
 }
 
 export default __ravenAnimate;
