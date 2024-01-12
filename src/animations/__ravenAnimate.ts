@@ -2,6 +2,7 @@ import { Raven } from "../classes";
 import { ravenCanvas, ravenCollisionCanvas } from "../components/canvas";
 import {
   drawRavenAttackPlayerLifeBar,
+  drawRavenAttackPlayerLost,
   drawRavenAttackPlayerScore,
 } from "../helpers";
 import { ravenAttackGameOver } from "../states";
@@ -54,6 +55,7 @@ function __ravenAnimate(timestamp: number) {
   ravensCollection = ravensCollection.filter((raven) => !raven.markForDeletion);
 
   if (!ravenAttackGameOver) requestAnimationFrame(__ravenAnimate);
+  else drawRavenAttackPlayerLost();
 }
 
 export default __ravenAnimate;
