@@ -1,6 +1,7 @@
+import { Enemy } from ".";
 import { ENEMY_PROPS } from "./__enemy";
 
-class __zombieBat implements ENEMY_PROPS {
+class __zombieBat extends Enemy implements ENEMY_PROPS {
   update(deltaTime: number) {}
   draw() {}
 }

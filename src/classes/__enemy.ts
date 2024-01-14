@@ -4,7 +4,7 @@ export interface ENEMY_PROPS {
 }
 
 class __enemy implements ENEMY_PROPS {
-  update() {}
+  update(deltaTime: number) {}
   draw() {}
 }
 
