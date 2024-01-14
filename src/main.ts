@@ -1,3 +1,5 @@
+import { gameAnimate } from "./animations";
+import { gameCanvas } from "./components/canvas";
 import "./styles/index.scss";
 
 const app: HTMLDivElement | null = document.querySelector("#app");
@@ -26,3 +28,8 @@ if (!app) throw new Error("Unable to extract div#app node from the DOM");
 // ravenGameAudio.loop = true;
 // ravenGameAudio.volume = 0.1;
 // window.onclick = () => ravenGameAudio.play();
+
+window.addEventListener("load", () => {
+  app.append(gameCanvas.canvas);
+  gameAnimate(0);
+});

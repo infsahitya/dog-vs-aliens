@@ -17,7 +17,7 @@ export type ENEMY_NAMES =
   | "GHOST"
   | "CREEPY SPIDER";
 
-export type ENEMY_PROPS = {
+export type ENEMY_CONFIG_PROPS = {
   sprite: HTMLImageElement;
   movementType: string;
 } & Record<"spriteWidth" | "spriteHeight" | "spriteFramesCount", number>;
@@ -43,7 +43,7 @@ IMAGE_GHOST.src = SPRITE_GHOST;
 const IMAGE_CREEPY_SPIDER = new Image();
 IMAGE_CREEPY_SPIDER.src = SPRITE_CREEPY_SPIDER;
 
-const enemies: Map<ENEMY_NAMES, ENEMY_PROPS> = new Map([
+const enemies: Map<ENEMY_NAMES, ENEMY_CONFIG_PROPS> = new Map([
   [
     "ZOMBIE BAT",
     {

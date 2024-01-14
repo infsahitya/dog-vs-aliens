@@ -1,7 +1,6 @@
 const canvas: HTMLCanvasElement = document.createElement("canvas");
 const canvasID: Attr = document.createAttribute("id");
-
-canvasID.value = "enemyCanvas";
+canvasID.value = "gameCanvas";
 canvas.setAttributeNode(canvasID);
 
 const CTX: CanvasRenderingContext2D = canvas.getContext("2d")!;
